@@ -106,6 +106,7 @@ Item.objects.filter(item_nav_position__gt=2)
 # Получить одну запись
 Item.objects.get(pk=1)
 
-# Удалить все
+# Удалить
+Item.objects.all().filter(id__gte=2).delete()
 Item.objects.all().delete()
 ```
