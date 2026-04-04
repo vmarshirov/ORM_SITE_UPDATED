@@ -11,7 +11,7 @@ View (представление) — функция или класс, кото
 """
 
 from django.http import HttpRequest, HttpResponse
-#from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
 
 from .models import Item
 
