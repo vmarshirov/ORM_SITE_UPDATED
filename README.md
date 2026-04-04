@@ -28,7 +28,7 @@ python manage.py runserver
 
 
 ## ORM — полезные команды (Django shell)
-
+```bash
 python manage.py shell
 
 from site_app.models import Item
@@ -53,3 +53,4 @@ Item.objects.get(pk=1)
 # Удалить
 Item.objects.all().filter(id__gte=2).delete()
 Item.objects.all().delete()
+```
