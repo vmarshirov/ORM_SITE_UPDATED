@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+{# index.html — главная страница сайта (/).                                      #}
+{# Наследует layout.html и переопределяет блоки title и content.                 #}
+
+{% load static %}
+
+{% block title %}<title>orm_site_prj — Начало работы</title>{% endblock %}
+
+{% block content %}
+<div class="card">
+
+    {# Пустая навигация — на главной странице нет вкладок,                       #}
+    {# но блок оставлен для структурного единообразия с page.html                #}
+    <div class="card-body">
+        <ul class="nav nav-tabs">
+            {# Вкладки появятся после создания страниц через /admin/              #}
+        </ul>
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title text-center">Начинаем работу с проектом</h5>
+
+{# Блок с инструкцией по первому запуску проекта #}
+<pre class="bg-light p-3 rounded">
+<strong>Применить миграции и создать БД:</strong>
+    python manage.py makemigrations
+    python manage.py migrate
+
+<strong>Создать суперпользователя для /admin:</strong>
+    python manage.py createsuperuser
+    # логин: root, пароль: root (только для разработки)
+
+<strong>Открыть административную панель:</strong>
+    http://127.0.0.1:8000/admin/
+
+<strong>Работа с ORM через Django shell:</strong>
+    python manage.py shell
+
+    from site_app.models import Item
+
+    # Просмотр всех записей
+    Item.objects.all()
+
+    # Создать новую запись
+    new_obj = Item(item_title='Тест')
+    new_obj.save()
+
+    # Удалить все записи
+    Item.objects.filter(id__gte=0).delete()
+
+<strong>Открыть админку и добавить запись:</strong>
+    http://127.0.0.1:8000/admin
+
+
+<strong>Открыть страницу с id=1:</strong>
+    http://127.0.0.1:8000/page/1
+        </pre>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{# page.html — шаблон страницы содержимого (/page/<pk>).                         #}
+{# Отображает навигационные вкладки и HTML-контент выбранной записи Item.         #}
+{#                                                                                #}
+{# Контекст (передаётся из views.page):                                           #}
+{#   pk             — первичный ключ текущей страницы (int)                       #}
+{#   nav_objects    — QuerySet словарей: id, item_nav, item_nav_position          #}
+{#   content_object — объект Item для текущей страницы                            #}
+
+{% block title %}<title>{{ content_object.item_title }}</title>{% endblock %}
+
+{% block content %}
+<div class="card">
+
+    {# ==================== Навигационные вкладки ==================== #}
+    <div class="card-body pb-0">
+        <ul class="nav nav-tabs">
+            {% for object in nav_objects %}
+                {# Каждая запись с item_nav_position > 0 отображается как вкладка #}
+                <li class="nav-item">
+                    <a class="nav-link {% if pk == object.id %}active{% endif %}"
+                       href="{% url 'site_app:page' pk=object.id %}">
+                        {# object.item_nav — текст ссылки из БД #}
+                        {{ object.item_nav }}
+                    </a>
+                </li>
+            {% empty %}
+                {# Этот блок выводится, если nav_objects пуст (нет записей в БД) #}
+                <li class="nav-item">
+                    <span class="nav-link disabled">Нет страниц — добавьте записи в /admin/</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {# ==================== Содержимое страницы ==================== #}
+    <div class="card-body">
+        {# Заголовок страницы.                                                    #}
+        {# {% autoescape off %} — отключает HTML-экранирование, так как           #}
+        {# item_title и item_content могут содержать HTML-разметку.               #}
+        {# ВАЖНО: используйте только для доверенного контента из БД!              #}
+        <h5 class="card-title text-center">
+            {% autoescape off %}{{ content_object.item_title }}{% endautoescape %}
+        </h5>
+
+        {# Основной HTML-контент страницы из поля item_content #}
+        <div class="page-content">
+            {% autoescape off %}{{ content_object.item_content }}{% endautoescape %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
