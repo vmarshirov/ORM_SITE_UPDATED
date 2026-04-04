@@ -11,7 +11,7 @@ View (представление) — функция или класс, кото
 """
 
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import get_object_or_404, render
+#from django.shortcuts import get_object_or_404, render
 
 from .models import Item
 
@@ -63,6 +63,7 @@ def page(request: HttpRequest, pk: int) -> HttpResponse:
         .order_by("-item_nav_position")
     )
 
+       
     content_object = Item.objects.get(pk=pk)
 
     # Контекст — словарь переменных, передаваемых в шаблон.
