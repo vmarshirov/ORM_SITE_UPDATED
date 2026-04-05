@@ -84,7 +84,6 @@ class Item(models.Model):
         verbose_name_plural = "Страницы"
 
         # Сортировка по умолчанию: убывание по позиции в навигации.
-        # Знак '-' означает ORDER BY item_nav_position DESC.
         ordering = ("item_nav_position",)
 
     # ------------------------------------------------------------------
