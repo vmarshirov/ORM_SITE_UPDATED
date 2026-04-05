@@ -60,7 +60,7 @@ def page(request: HttpRequest, pk: int) -> HttpResponse:
         Item.objects
         .values("id", "item_nav", "item_nav_position")
         .filter(item_nav_position__gt=0)
-        .order_by("-item_nav_position")
+        .order_by("item_nav_position")
     )
 
        
