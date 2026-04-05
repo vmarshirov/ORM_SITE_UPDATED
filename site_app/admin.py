@@ -37,7 +37,7 @@ class ItemAdmin(admin.ModelAdmin):
     # current_date имеет auto_now=True, Django запрещает его редактирование
     readonly_fields = ["id", "item_current_date"]
 
-    # Порядок сортировки: новые записи первыми
+    # Порядок сортировки: по приоритетам в анавигации
     ordering = ["item_nav_position"]
 
 
